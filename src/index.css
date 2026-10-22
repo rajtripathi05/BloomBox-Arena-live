@@ -1,0 +1,56 @@
+@import "@fontsource-variable/space-grotesk";
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --color-ink: #0a0f1e;
+  --color-panel: #111a33;
+  --color-panel-2: #16223f;
+  --color-line: #22305a;
+  --color-bloom: #3b82f6;
+  --color-bloom-deep: #1d4ed8;
+  --color-coin: #f5b942;
+  --color-win: #34d399;
+  --color-loss: #fb7185;
+  --color-mute: #93a0c4;
+  /* Somaiya crimson, taken from the university mark; used sparingly for institutional accents */
+  --color-somaiya: #c8323c;
+  --color-ink-2: #0e1530;
+  --radius-card: 1rem;
+  --radius-control: 0.75rem;
+  --shadow-elev-1: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 8px 24px -16px rgba(0, 0, 0, 0.7);
+  --shadow-elev-2: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 18px 40px -20px rgba(0, 0, 0, 0.8);
+  --shadow-glow-coin: 0 8px 28px -8px rgba(245, 185, 66, 0.55);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+}
+
+html { color-scheme: dark; }
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: #e8edff;
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+  background-image: radial-gradient(1200px 500px at 50% -10%, rgba(59, 130, 246, 0.16), transparent 60%);
+  background-attachment: fixed;
+  overscroll-behavior-y: none;
+}
+.num { font-variant-numeric: tabular-nums; font-family: var(--font-display); letter-spacing: -0.01em; }
+.safe-b { padding-bottom: max(env(safe-area-inset-bottom), 0px); }
+.safe-t { padding-top: env(safe-area-inset-top); }
+:focus-visible { outline: 2px solid var(--color-bloom); outline-offset: 2px; border-radius: 8px; }
+input[type="range"] { accent-color: var(--color-bloom); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+/* Shared surface + motion primitives */
+.surface-elev { box-shadow: var(--shadow-elev-1); transition: box-shadow var(--duration-base) var(--ease-out-soft); }
+.surface-elev:hover { box-shadow: var(--shadow-elev-2); }
+.skeleton { position: relative; overflow: hidden; background: rgba(255, 255, 255, 0.06); border-radius: 0.75rem; }
+.skeleton::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent); animation: shimmer 1.4s infinite; }
+@keyframes shimmer { to { transform: translateX(100%); } }
